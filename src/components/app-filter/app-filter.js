@@ -8,26 +8,29 @@ export default class AppFilter extends Component {
   }
 
   render() {
-    return (
-      <div className="btn-group">
+    const buttonsData = [
+      { name: "all", label: "Все сотрудники" },
+      { name: "rise", label: "На повышение" },
+      { name: "moreThen1000", label: "З/П больше 1000$" },
+    ];
+
+    const buttons = buttonsData.map(({ name, label }) => {
+      const active = this.props.filter === name;
+      const clazz = active ? "btn-light" : "btn-outline-light";
+
+      return (
         <button
-          className="btn btn-light"
+          className={`btn ${clazz}`}
           type="button"
-          onClick={() => this.props.filterAllEmp()}
+          name={name}
+          key={name}
+          onClick={() => this.props.onFilterSelect(name)}
         >
-          Все сотрудники
+          {label}
         </button>
-        <button className="btn btn-outline-light" type="button">
-          На повышение
-        </button>
-        <button
-          className="btn btn-outline-light"
-          type="button"
-          onClick={() => this.props.filterBySalary()}
-        >
-          З/П больше 1000$
-        </button>
-      </div>
-    );
+      );
+    });
+
+    return <div className="btn-group">{buttons}</div>;
   }
 }
