@@ -2,7 +2,12 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 
 import "./employees-list.css";
 
-export default function EmployeesList({ data, onDelete, onToggleProp }) {
+export default function EmployeesList({
+  data,
+  onDelete,
+  onToggleProp,
+  onSalaryEdit,
+}) {
   const elements = data.map((el) => {
     const { id, ...elProps } = el;
     return (
@@ -13,6 +18,8 @@ export default function EmployeesList({ data, onDelete, onToggleProp }) {
         onToggleProp={(e) =>
           onToggleProp(id, e.currentTarget.getAttribute("data-toggle"))
         }
+        id={id}
+        onSalaryEdit={onSalaryEdit}
       />
     );
   });

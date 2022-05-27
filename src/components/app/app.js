@@ -105,6 +105,19 @@ export default class App extends Component {
     });
   };
 
+  onSalaryEdit = (id, newSalary) => {
+    const newData = [...this.state.data];
+    newData.forEach((el) => {
+      if (el.id === id) {
+        el.salary = newSalary;
+      }
+    });
+
+    this.setState({
+      data: newData,
+    });
+  };
+
   render() {
     const { data, term, filter } = this.state;
 
@@ -126,6 +139,7 @@ export default class App extends Component {
           data={visibleData}
           onDelete={this.deleteItem}
           onToggleProp={this.onToggleProp}
+          onSalaryEdit={this.onSalaryEdit}
         />
 
         <EmployeesAddForm addItem={this.addItem} />

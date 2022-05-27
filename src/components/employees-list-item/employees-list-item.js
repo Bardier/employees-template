@@ -1,7 +1,16 @@
 import "./employees-list-item.css";
 
 export default function EmployeesListItem(props) {
-  const { name, salary, onDelete, onToggleProp, increase, rise } = props;
+  const {
+    name,
+    salary,
+    onDelete,
+    onToggleProp,
+    increase,
+    rise,
+    id,
+    onSalaryEdit,
+  } = props;
 
   let classNames = "list-group-item d-flex justify-content-between";
   if (increase) {
@@ -24,6 +33,9 @@ export default function EmployeesListItem(props) {
         type="text"
         className="list-group-item-input"
         defaultValue={salary + "$"}
+        onChange={({ target }) =>
+          onSalaryEdit(id, target.value.replace("$", ""))
+        }
       />
       <div className="d-flex justify-content-center align-items-center">
         <button
